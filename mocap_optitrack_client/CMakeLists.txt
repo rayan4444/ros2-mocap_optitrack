@@ -19,6 +19,8 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)#publisher
 find_package(rclcpp_components REQUIRED)
 find_package(mocap_optitrack_interfaces REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
 
 #Download the NatNet SDK library
 include(FetchContent)
@@ -53,7 +55,7 @@ PUBLIC
 )
 
 # INSTALLATION
-install(TARGETS 
+install(TARGETS
   mocap_optitrack_client
   DESTINATION lib/${PROJECT_NAME}
 )

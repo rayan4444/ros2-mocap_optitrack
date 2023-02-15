@@ -5,6 +5,7 @@
 #include <memory>
 #include "rclcpp/rclcpp.hpp"
 #include "mocap_optitrack_interfaces/msg/rigid_body_array.hpp"
+#include "tf2_ros/transform_broadcaster.h"
 #include <eigen3/Eigen/Dense>
 
 using std::placeholders::_1;
@@ -20,18 +21,17 @@ private:
     Eigen::Vector4f rotmToQuat(Eigen::Matrix3f R) const;
     // Attributes
     rclcpp::Subscription<mocap_optitrack_interfaces::msg::RigidBodyArray>::SharedPtr subscription_;
-    rclcpp::Publisher<mocap_optitrack_interfaces::msg::RigidBodyArray>::SharedPtr publisher_;
-    
-    
+    std::unique_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
+
 // Public attributes and methods
 public:
     // Definition of the construtors
     WorldToBase();
 
     // Getters
-    
+
     // Setters
-    
+
 };
- 
+
 #endif

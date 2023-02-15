@@ -57,7 +57,7 @@ MoCapPublisher::MoCapPublisher(): Node("natnet_client")
 void MoCapPublisher::sendRigidBodyMessage(sRigidBodyData* bodies_ptr, int nRigidBodies)
 {
   std::vector<sRigidBodyData> bodies;
-  for(int i=0; i < nRigidBodies; i++) 
+  for(int i=0; i < nRigidBodies; i++)
   {
     bodies.push_back(bodies_ptr[i]);
   }
@@ -89,6 +89,7 @@ void MoCapPublisher::sendRigidBodyMessage(sRigidBodyData* bodies_ptr, int nRigid
       rb.id = bodies[i].ID;
       rb.valid =  bodies[i].params & 0x01;
       rb.mean_error = bodies[i].MeanError;
+      rb.pose_stamped.header.frame_id  = to_string(bodies[i].ID);
       rb.pose_stamped.pose.position.x = bodies[i].x;
       rb.pose_stamped.pose.position.y = bodies[i].y;
       rb.pose_stamped.pose.position.z = bodies[i].z;
@@ -179,7 +180,7 @@ int main(int argc, char ** argv)
 {
   (void) argc;
   (void) argv;
-  
+
   // Initialize ROS2
   rclcpp::init(argc, argv);
 
@@ -187,7 +188,7 @@ int main(int argc, char ** argv)
   auto mocapPub = std::make_shared<MoCapPublisher>();
   //Create the MoCapNatNetClient
   MoCapNatNetClient* c = new MoCapNatNetClient(mocapPub.get());
-  // Try to connect the client 
+  // Try to connect the client
   int retCode = c->connect();
   if (retCode != 0)
   {

@@ -15,10 +15,14 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_ros REQUIRED)
 
 # Add the custom interfaces for the mocap system
 find_package(rclcpp REQUIRED)
 find_package(mocap_optitrack_interfaces REQUIRED)
+
 
 #Include the headers.
 #NOTE : libeiegen3-dev is assumed to be installed in the system
@@ -26,9 +30,9 @@ include_directories(include)
 
 #Create the executables
 add_executable(mocap_optitrack_w2b src/WorldToBase.cpp)
-ament_target_dependencies(mocap_optitrack_w2b rclcpp mocap_optitrack_interfaces)
+ament_target_dependencies(mocap_optitrack_w2b rclcpp mocap_optitrack_interfaces tf2 tf2_ros geometry_msgs)
 
-install(TARGETS 
+install(TARGETS
   mocap_optitrack_w2b
   DESTINATION lib/${PROJECT_NAME})
 
