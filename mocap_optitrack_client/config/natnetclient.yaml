@@ -9,7 +9,7 @@ natnet_client:
     # or
     # b) run the container with the option --net host
     # server_address: "10.42.0.250"
-    server_address: "172.20.10.5"
+    server_address: "172.20.10.2"
     # Type of the connection: 0 = multicast, 1 = unicast.
     connection_type: 0 #default value: 0
     # Multicast address of the server
